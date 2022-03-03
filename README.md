@@ -199,9 +199,7 @@ You should use the `mounted()` Hook to set the lifcycle hook that runs only once
 Using the `mounted()` hook set `CountriesDetails` component. It should make a request to the RestCountries API and fetch the data for the specific country. You can construct the request endpoint using the country's `alpha3Code`. Example:
 
 - United States: https://ih-countries-api.herokuapp.com/countries/USA
-
 - Japan: https://ih-countries-api.herokuapp.com/countries/JPN
-
 - India: https://ih-countries-api.herokuapp.com/countries/IND
 
 The effect should run after the initial render and each time the URL parameter with the `alpha3Code` changes.
