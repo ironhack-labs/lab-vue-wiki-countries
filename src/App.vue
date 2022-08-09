@@ -9,11 +9,6 @@
 import Navbar from "./components/Navbar.vue";
 
 export default {
-  data() {
-    return {
-      countries: [],
-    };
-  },
   components: {
     Navbar,
   },
