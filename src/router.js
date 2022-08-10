@@ -5,7 +5,8 @@ const routes = [
   {
     path: "/",
     name: "root",
-    component: () => import(/* webpackChunkName: 'index' */ "./pages/IndexView.vue"),
+    component: () =>
+      import(/* webpackChunkName: 'index' */ "./pages/IndexView.vue"),
   },
   {
     path: "/list",
@@ -18,7 +19,7 @@ const routes = [
         name: "details",
         component: () =>
           import(
-            /* webpackChunkName: 'details' */ "./pages/CountryDetails.vue"
+            /* webpackChunkName: 'details' */ "./pages/CountryDetailsView.vue"
           ),
       },
     ],
