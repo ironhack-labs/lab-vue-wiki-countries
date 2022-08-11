@@ -1,5 +1,9 @@
 <template>
-  <div class="col-5" style="max-height: 90vh; overflow: scroll">
+  <div
+    v-if="this.countries"
+    class="col-5"
+    style="max-height: 90vh; overflow: scroll"
+  >
     <div class="list-group text-center">
       <CountryListItem
         v-for="country in countries"
@@ -10,15 +14,19 @@
       />
     </div>
   </div>
+  <div class="loading" v-else>
+    Loading countries
+    <div class="spinner"></div>
+  </div>
 </template>
 
 <script>
 import CountryListItem from "./CountryListItem.vue";
-import countriesJson from "../../public/countries.json";
+import * as countriesAPI from "../api/countriesApi.js";
 export default {
   data() {
     return {
-      countries: [],
+      countries: null,
     };
   },
   props: {
@@ -26,14 +34,37 @@ export default {
   },
   components: { CountryListItem },
   methods: {
-    fetchCountries() {
-      return countriesJson;
+    async fetchCountries() {
+      return countriesAPI.sortCountries(await countriesAPI.getAllCountries());
     },
   },
-  mounted() {
-    this.countries = this.fetchCountries();
+  async created() {
+    this.countries = await this.fetchCountries();
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.loading {
+  display: flex;
+  flex-flow: row;
+}
+.spinner {
+  margin-left: 1rem;
+  border: 3px solid #f3f3f3; /* Light grey */
+  border-top: 3px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

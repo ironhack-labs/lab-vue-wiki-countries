@@ -39,7 +39,6 @@ export default {
     this.country = this.fetchCountry();
   },
   updated() {
-    console.log("updated");
     this.country = this.fetchCountry();
   },
   methods: {
