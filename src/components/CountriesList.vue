@@ -21,9 +21,13 @@ export default {
     countryList: Array,
   },
   components: { CountryListItem },
-
+  methods: {
+    fetchCountries() {
+      return countriesJson;
+    },
+  },
   mounted() {
-    this.countries = countriesJson;
+    this.countries = this.fetchCountries();
   },
 };
 </script>
