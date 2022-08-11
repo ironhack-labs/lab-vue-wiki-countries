@@ -1,8 +1,8 @@
 <template>
-  <!-- Countries List (Bootstrap column) -->
-  <div class="col-5" style="max-height: 90vh; overflow: scroll">
-    <div class="list-group text-center">
+  <div class="container">
+    <div class="row">
       <CountryList />
+      <router-view></router-view>
     </div>
   </div>
 </template>

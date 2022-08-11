@@ -15,7 +15,7 @@ const routes = [
       import(/* webpackChunkName: 'list' */ "./pages/CountriesListView.vue"),
     children: [
       {
-        path: "/details",
+        path: ":alphaCode",
         name: "details",
         component: () =>
           import(

@@ -18,7 +18,7 @@ export default {
       return `https://flagpedia.net/data/flags/icon/72x54/${this.alpha2Code?.toLowerCase()}.png`;
     },
     getLinkToDetail() {
-      return "/" + this.alpha3Code;
+      return "/list/" + this.alpha3Code;
     },
   },
 };

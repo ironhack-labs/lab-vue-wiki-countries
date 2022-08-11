@@ -1,5 +1,4 @@
 <template>
-  <!-- Country Details (Bootstrap column) -->
   <div class="col-7 text-center">
     <img :src="getFlag" alt="country flag" style="width: 300px" />
     <h1>{{ country.name.common }}</h1>
@@ -28,11 +27,9 @@
 </template>
 
 <script>
+import countriesJson from "../../public/countries.json";
 import CountryBorders from "./CountryBorders.vue";
 export default {
-  props: {
-    // country: Object,
-  },
   data() {
     return {
       country: {},
@@ -43,15 +40,9 @@ export default {
   },
   methods: {
     fetchCountry() {
-      return {
-        name: {
-          common: "France",
-        },
-        alpha2Code: "FR",
-        capital: ["Paris"],
-        area: 551695,
-        borders: ["AND", "BEL", "DEU", "ITA", "LUX", "MCO", "ESP", "CHE"],
-      };
+      return [...countriesJson].filter(
+        (c) => this.$route.params.alphaCode === c.alpha3Code
+      )[0];
     },
   },
 

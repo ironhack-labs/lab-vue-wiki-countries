@@ -19,7 +19,7 @@ export default {
         ?.name.common;
     },
     getLinkToDetail(alpha3Code) {
-      return "/" + alpha3Code;
+      return "/list/" + alpha3Code;
     },
   },
 };

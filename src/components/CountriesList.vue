@@ -1,11 +1,15 @@
 <template>
-  <CountryListItem
-    v-for="country in countries"
-    v-bind:key="country.alpha3Code"
-    :name="country?.name?.common"
-    :alpha2Code="country.alpha2Code"
-    :alpha3Code="country.alpha3Code"
-  />
+  <div class="col-5" style="max-height: 90vh; overflow: scroll">
+    <div class="list-group text-center">
+      <CountryListItem
+        v-for="country in countries"
+        v-bind:key="country.alpha3Code"
+        :name="country?.name?.common"
+        :alpha2Code="country.alpha2Code"
+        :alpha3Code="country.alpha3Code"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
