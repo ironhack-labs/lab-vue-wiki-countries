@@ -9,11 +9,4 @@ export default {
 };
 </script>
 
-<style scoped>
-li {
-  list-style-type: none;
-}
-tr > td:nth-child(1) {
-  font-weight: 600;
-}
-</style>
+<style></style>
