@@ -18,13 +18,7 @@
           <td>Borders</td>
           <td>
             <ul>
-              <li><a href="/AND">Andorra</a></li>
-              <li><a href="/BEL">Belgium</a></li>
-              <li><a href="/DEU">Germany</a></li>
-              <li><a href="/ITA">Italy</a></li>
-              <li><a href="/MCO">Monaco</a></li>
-              <li><a href="/ESP">Spain</a></li>
-              <li><a href="/CHE">Switzerland</a></li>
+              <CountryBorders :borders="this.country.borders" />
             </ul>
           </td>
         </tr>
@@ -34,40 +28,36 @@
 </template>
 
 <script>
+import CountryBorders from "./CountryBorders.vue";
 export default {
   props: {
     // country: Object,
   },
-
   data() {
     return {
       country: {},
     };
   },
-
   created() {
     this.country = {
       name: {
         common: "France",
       },
       alpha2Code: "FR",
-
       capital: ["Paris"],
-
       area: 551695,
-
       borders: ["AND", "BEL", "DEU", "ITA", "LUX", "MCO", "ESP", "CHE"],
     };
   },
-
   computed: {
     getFlag() {
-      return `https://flagcdn.com/w320/fr.png`;
+      return `https://flagcdn.com/w320/${this.country.alpha2Code.toLowerCase()}.png`;
     },
     getCapital() {
       return this.country?.capital[0];
     },
   },
+  components: { CountryBorders },
 };
 </script>
 
