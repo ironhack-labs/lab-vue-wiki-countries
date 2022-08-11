@@ -39,16 +39,22 @@ export default {
     };
   },
   created() {
-    this.country = {
-      name: {
-        common: "France",
-      },
-      alpha2Code: "FR",
-      capital: ["Paris"],
-      area: 551695,
-      borders: ["AND", "BEL", "DEU", "ITA", "LUX", "MCO", "ESP", "CHE"],
-    };
+    this.country = this.fetchCountry();
   },
+  methods: {
+    fetchCountry() {
+      return {
+        name: {
+          common: "France",
+        },
+        alpha2Code: "FR",
+        capital: ["Paris"],
+        area: 551695,
+        borders: ["AND", "BEL", "DEU", "ITA", "LUX", "MCO", "ESP", "CHE"],
+      };
+    },
+  },
+
   computed: {
     getFlag() {
       return `https://flagcdn.com/w320/${this.country.alpha2Code.toLowerCase()}.png`;
