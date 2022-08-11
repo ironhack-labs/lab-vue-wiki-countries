@@ -1,11 +1,11 @@
 <template>
-  <CountryDetailsComponent />
+  <CountryDetails />
 </template>
 
 <script>
-import CountryDetailsComponent from "../components/CountryDetailsComponent.vue";
+import CountryDetails from "../components/CountryDetails.vue";
 export default {
-  components: { CountryDetailsComponent },
+  components: { CountryDetails },
 };
 </script>
 
