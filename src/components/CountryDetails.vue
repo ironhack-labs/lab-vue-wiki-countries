@@ -1,13 +1,13 @@
 <template>
-  <div class="col-7 text-center">
-    <img :src="getFlag" alt="country flag" style="width: 300px" />
-    <h1>{{ country.name.common }}</h1>
+  <div v-if="alphaCode" class="col-7 text-center">
+    <img :src="flag" alt="country flag" style="width: 300px" />
+    <h1>{{ this.country.name?.common }}</h1>
     <table class="table">
       <thead></thead>
       <tbody>
         <tr>
           <td style="width: 30%">Capital</td>
-          <td>{{ getCapital }}</td>
+          <td>{{ capital }}</td>
         </tr>
         <tr>
           <td>Area</td>
@@ -32,25 +32,32 @@ import CountryBorders from "./CountryBorders.vue";
 export default {
   data() {
     return {
-      country: {},
+      country: null,
     };
   },
   created() {
     this.country = this.fetchCountry();
   },
+  updated() {
+    console.log("updated");
+    this.country = this.fetchCountry();
+  },
   methods: {
     fetchCountry() {
       return [...countriesJson].filter(
-        (c) => this.$route.params.alphaCode === c.alpha3Code
+        (c) => this.alphaCode === c.alpha3Code
       )[0];
     },
   },
 
   computed: {
-    getFlag() {
-      return `https://flagcdn.com/w320/${this.country.alpha2Code.toLowerCase()}.png`;
+    alphaCode() {
+      return this.$route.params.alphaCode;
     },
-    getCapital() {
+    flag() {
+      return `https://flagcdn.com/w320/${this.country.alpha2Code?.toLowerCase()}.png`;
+    },
+    capital() {
       return this.country?.capital[0];
     },
   },

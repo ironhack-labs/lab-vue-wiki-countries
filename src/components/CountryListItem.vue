@@ -1,8 +1,11 @@
 <template>
-  <a class="list-group-item list-group-item-action" :href="getLinkToDetail">
+  <router-link
+    class="list-group-item list-group-item-action"
+    :to="getLinkToDetail"
+  >
     <img :src="getFlag" />
     <p>{{ name }}</p>
-  </a>
+  </router-link>
 </template>
 
 <script>

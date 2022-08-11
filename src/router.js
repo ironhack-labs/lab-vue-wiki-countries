@@ -1,26 +1,23 @@
 // src/router.js
 import { createRouter, createWebHistory } from "vue-router";
-
+import IndexView from "./pages/IndexView.vue";
+import CountriesListView from "./pages/CountriesListView.vue";
+import CountryDetailsView from "./pages/CountryDetailsView.vue";
 const routes = [
   {
     path: "/",
     name: "root",
-    component: () =>
-      import(/* webpackChunkName: 'index' */ "./pages/IndexView.vue"),
+    component: IndexView,
   },
   {
     path: "/list",
     name: "list",
-    component: () =>
-      import(/* webpackChunkName: 'list' */ "./pages/CountriesListView.vue"),
+    component: CountriesListView,
     children: [
       {
         path: ":alphaCode",
         name: "details",
-        component: () =>
-          import(
-            /* webpackChunkName: 'details' */ "./pages/CountryDetailsView.vue"
-          ),
+        component: CountryDetailsView,
       },
     ],
   },

@@ -1,7 +1,9 @@
 <template>
   <ul>
     <li v-for="border in borders" :key="border">
-      <a :href="getLinkToDetail(border)">{{ getCountryName(border) }}</a>
+      <router-link :to="getLinkToDetail(border)">{{
+        getCountryName(border)
+      }}</router-link>
     </li>
   </ul>
 </template>
