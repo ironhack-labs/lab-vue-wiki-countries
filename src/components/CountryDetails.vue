@@ -1,5 +1,5 @@
 <template>
-  <div v-if="alphaCode && capital" class="col-7 text-center">
+  <div v-if="alphaCode && country" class="col-7 text-center">
     <img :src="flag" alt="country flag" style="width: 300px" />
     <h1>{{ this.country.name?.common }}</h1>
     <table class="table">
