@@ -1,5 +1,5 @@
 <template>
-  <div v-if="alphaCode" class="col-7 text-center">
+  <div v-if="alphaCode && capital" class="col-7 text-center">
     <img :src="flag" alt="country flag" style="width: 300px" />
     <h1>{{ this.country.name?.common }}</h1>
     <table class="table">
@@ -24,11 +24,15 @@
       </tbody>
     </table>
   </div>
+  <div v-else class="col-7 text-center">
+    <TextWithSpinner text="Loading country details" />
+  </div>
 </template>
 
 <script>
-import countriesJson from "../../public/countries.json";
 import CountryBorders from "./CountryBorders.vue";
+import { getCountryByAlpha3Code } from "../api/countriesApi";
+import TextWithSpinner from "./TextWithSpinner.vue";
 export default {
   data() {
     return {
@@ -36,17 +40,16 @@ export default {
     };
   },
   created() {
-    this.country = this.fetchCountry();
-  },
-  updated() {
-    this.country = this.fetchCountry();
-  },
-  methods: {
-    fetchCountry() {
-      return [...countriesJson].filter(
-        (c) => this.alphaCode === c.alpha3Code
-      )[0];
-    },
+    // watch the params of the route to fetch the data again
+    this.$watch(
+      () => this.$route.params,
+      async () => {
+        this.country = await getCountryByAlpha3Code(this.alphaCode);
+      },
+      // fetch the data when the view is created and the data is
+      // already being observed
+      { immediate: true }
+    );
   },
 
   computed: {
@@ -60,7 +63,7 @@ export default {
       return this.country?.capital[0];
     },
   },
-  components: { CountryBorders },
+  components: { CountryBorders, TextWithSpinner },
 };
 </script>
 
