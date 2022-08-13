@@ -39,17 +39,13 @@ export default {
       country: null,
     };
   },
-  created() {
-    // watch the params of the route to fetch the data again
-    this.$watch(
-      () => this.$route.params,
-      async () => {
-        this.country = await getCountryByAlpha3Code(this.alphaCode);
-      },
-      // fetch the data when the view is created and the data is
-      // already being observed
-      { immediate: true }
-    );
+  async mounted() {
+    this.country = await getCountryByAlpha3Code(this.alphaCode);
+  },
+  watch: {
+    async alphaCode(newAlphaCode) {
+      this.country = await getCountryByAlpha3Code(newAlphaCode);
+    },
   },
 
   computed: {
