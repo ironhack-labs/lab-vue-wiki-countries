@@ -1,65 +1,73 @@
 <template>
-  <h1>Country List</h1>
-  <!-- wrapper div de bootstrap -->
   <div class="container">
-    <!-- row wrapper div de bootstrap -->
-    <div class="row">
-      <div class="col-5">
-        <div class="list-group">
+    <h1 class="text-center my-3">Country List</h1>
+    <div v-if="this.countries" class="row">
+      <div class="col-4">
+        <ul class="list-group">
           <router-link
+            :to="`/list/${country.alpha3Code}`"
             v-for="(country, index) in countries"
             :key="index"
-            :to="`/list/${country.alpha3Code}`"
-            class="list-group-item list-group-item-action d-flex flex-column justify-content-center"
           >
-            <img
-              class="flag"
-              :src="`https://flagpedia.net/data/flags/icon/72x54/${country.alpha2Code.toLowerCase()}.png`"
-              alt=""
-            />
-            <p>
-              {{ country.name.common }}
-            </p>
+            <li
+              class="list-group-item d-flex flex-column justify-content-center"
+            >
+              <img
+                v-bind:src="`https://flagpedia.net/data/flags/icon/72x54/${country.alpha2Code.toLowerCase()}.png`"
+                alt=""
+                class="wuTangImg"
+              />
+              <p class="text-center fw-bold">{{ country.name.common }}</p>
+            </li>
           </router-link>
-        </div>
+        </ul>
       </div>
-      <div class="col-7">
+      <div class="col-8">
         <router-view />
       </div>
+    </div>
+    <div v-else class="row">
+      <Spinner text="Loading Countries..." />
     </div>
   </div>
 </template>
 
 <script>
+import Spinner from "../components/Spinner.vue";
 export default {
   name: "CountriesList",
+  components: { Spinner },
   data() {
     return {
-      //definimos un valor de datos estilo array para recibir la info del api
+      // definir un valor de dato estilo null para poder recibir la info del API!
       countries: null,
     };
   },
+
   methods: {
     async fetchCountries() {
       const response = await fetch(
         "https://ih-countries-api.herokuapp.com/countries"
       );
+
       const finalResponse = await response.json();
-      // console.log(finalResponse);//VERIFICAMOS MEDIANTES UNA LLAMADA A CONSOLA QUE RECIBIMOS LOS DATOS
-      this.countries = finalResponse;
+      console.log(finalResponse);
+
+      this.countries = finalResponse.sort((a, b) => {
+        return a.name.common.localeCompare(b.name.common);
+      });
     },
   },
-  //usamos el created hook para hacer nuestra llamada inicial a nuestra base de datos.
-  //no usamos async en este caso porque la asincronia la maneja la funcion fetchCountries. El hook created() solo se encarga de llamar la funcion fetchCountries
+
+  // USamos el created-hook [created()] para hacer nuestra llamada inciial a la base de datos y nos traemos esa info antes de que se pinte algo en el UI.
   created() {
     this.fetchCountries();
   },
 };
 </script>
 
-<style>
-.flag {
-  width: 100px;
-  height: 80px;
+<style scoped>
+.wuTangImg {
+  width: 150px;
 }
 </style>
