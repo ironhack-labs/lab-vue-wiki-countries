@@ -1,5 +1,5 @@
 <template>
-    <div> Lab WikiCountries</div>
+  
 </template>
 
 <script>
