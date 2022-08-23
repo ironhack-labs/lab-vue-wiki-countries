@@ -1,32 +1,33 @@
 <template>
-  <div className="app">
-    <header className="app-header">
-      <img :src="logo" className="app-logo" alt="logo" />
-      <p>
-        Edit <code>src/app.js</code> and save to reload.
-      </p>
-      <a
-        className="app-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn Vue
-      </a>
-    </header>
+  <Navbar></Navbar>
+  <div class="container">
+  <CountriesList></CountriesList> 
+  <router-view></router-view> 
   </div>
 </template>
+ 
 
 <script>
-  import logo from './logo.svg';
+import Navbar from './components/Navbar.vue';
+import CountriesList from './components/CountriesList.vue';
+import json from './countries.json'
+  
   export default {
-    data: () => ({
-      logo
-    })
-  }
+    data(){
+     return{
+      myJson: json
+      }
+    },
+   
+    components:{
+    Navbar,
+    CountriesList,
+},
+  };
 </script>
 
 <style>
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
