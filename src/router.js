@@ -5,7 +5,7 @@ import HomeView from '../src/views/HomeView.vue';
 const routes = [
   {
     path: '/',
-    name: 'HomeView',
+    name: 'Home',
     // component: () => import(/* webpackChunkName: 'index' */ './pages/index.vue')
     component: HomeView,
   },
