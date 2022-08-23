@@ -5,7 +5,7 @@ import HomeView from '../src/views/HomeView.vue';
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'HomeView',
     // component: () => import(/* webpackChunkName: 'index' */ './pages/index.vue')
     component: HomeView,
   },
@@ -23,7 +23,7 @@ const routes = [
   // }
 ];
 
-const router = createRouter({
+export default createRouter({
   history: createWebHistory('/'),
   routes,
   scrollBehavior() {

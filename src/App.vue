@@ -1,16 +1,21 @@
 <template>
   <div className="app">
-    <router-link to="/">Home</router-link>
+    <NavBar />
     <router-view />
   </div>
 </template>
 
 <script>
   import logo from './logo.svg';
+  import NavBar from '../src/components/NavBar.vue';
+
   export default {
     data: () => ({
       logo
-    })
+    }),
+    components: { 
+      NavBar, 
+    }
   }
 </script>
 
