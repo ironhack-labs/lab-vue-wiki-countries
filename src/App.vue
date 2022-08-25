@@ -8,15 +8,33 @@
 <script>
   import logo from './logo.svg';
   import NavBar from '../src/components/NavBar.vue';
+  import CountriesList from './components/CountriesList.vue';
 
   export default {
-    data: () => ({
-      logo
-    }),
+    name: 'App',
     components: { 
-      NavBar, 
+      NavBar,
+      CountriesList,
+    },
+    data() {
+      return {
+        countries: countriesData, 
+      };
+    },
+    computed: {
+      getCoutriesElementsToShowList() {
+        let countryId = 0;
+        return this.countries.map(country => {
+          return {
+            id: ++countryId,
+            name: country.name.common,
+            alpha2Code: country.alpha2Code,
+            alpha3Code: country.alpha3Code,
+          }
+        });
+      },
     }
-  }
+  };
 </script>
 
 <style>
