@@ -1,7 +1,7 @@
 <template>
   <Navbar></Navbar>
   <div class="container">
-    <CountriesList :countries='getCountry'></CountriesList>
+    <CountriesList :countries="getCountry" ></CountriesList>
     <router-view></router-view>
   </div>
 </template>
