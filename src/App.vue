@@ -1,14 +1,18 @@
 <template>
- <div class="app"> Hola
-  </div>
+  <Navbar/>
+  <Countrieslist/>
+  <router-view/>
 </template>
 
 <script>
-  import logo from './logo.svg';
+  import Navbar from './components/Navbar.vue';
+  import Countrieslist from './components/CountriesList.vue';
+
   export default {
-    data: () => ({
-      logo
-    })
+    components: {
+      Navbar,
+      Countrieslist,
+    },
   }
 </script>
 
