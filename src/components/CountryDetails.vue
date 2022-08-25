@@ -1,6 +1,6 @@
 <template>
   <div class="countries-details--container">
-    <img :src="`https://flagpedia.net/data/flags/icon/72x54/${countryInfo.alpha2code.toLowerCase()}.png`" :alt="`Flag of the ${countryInfo.name}`">
+    <img :src="`https://flagpedia.net/data/flags/icon/72x54/${countryInfo.alpha2Code.toLowerCase()}.png`" :alt="`Flag of the ${countryInfo.name}`">
     <h1></h1>
     <p>Capital: {{ }}</p>
     <p>Area: {{ }}</p>
@@ -40,7 +40,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

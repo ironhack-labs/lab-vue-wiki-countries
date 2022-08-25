@@ -1,14 +1,19 @@
 <template>
   <div className="app">
     <NavBar />
-    <router-view />
+    <div class="container">
+      <div class="row">
+        <CountriesList :countries="countries"/>
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import logo from './logo.svg';
   import NavBar from '../src/components/NavBar.vue';
   import CountriesList from './components/CountriesList.vue';
+  import countriesData from '../public/countries.json';
 
   export default {
     name: 'App',
@@ -18,7 +23,7 @@
     },
     data() {
       return {
-        countries: countriesData, 
+        countries: countriesData,
       };
     },
     computed: {
