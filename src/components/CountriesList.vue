@@ -1,14 +1,15 @@
 <template>
+ <router-link v-for="country in countries" :key="country.id"
+ :to="country.alpha2Code"></router-link> 
 
- <!-- divCountries List (Bootstrap column) -->
- <div v-for="data in my_myJson" :key="data.alpha2Code">
- <router-link to="data.alpha2Code" ></router-link>
- </div>
+<div class="router-list"></div>
 
 </template>
 <script>
 export default {
     name: 'CountriesList',
-    props:
+    props:{
+        countries: Array,
+    },
 };
-</script>
+</script> 

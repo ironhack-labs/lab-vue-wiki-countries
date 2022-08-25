@@ -1,44 +1,57 @@
 <template>
   <Navbar></Navbar>
   <div class="container">
-  <CountriesList></CountriesList> 
-  <router-view></router-view> 
+    <CountriesList :countries='getCountry'></CountriesList>
+    <router-view></router-view>
   </div>
 </template>
- 
-
 <script>
-import Navbar from './components/Navbar.vue';
-import CountriesList from './components/CountriesList.vue';
-import json from './countries.json'
-  
-  export default {
-    data(){
-     return{
-      myJson: json
-      }
-    },
-   
-    components:{
+import Navbar from "./components/Navbar.vue";
+import CountriesList from "./components/CountriesList.vue";
+import countriesData from "../public/countries.json";
+
+export default {
+  name: "App",
+  components: {
     Navbar,
     CountriesList,
-},
-  };
+  },
+  data() {
+    return {
+      countries: countriesData,
+    };
+  },
+  computed: {
+    getCountry() {
+     return this.countries.map((country) => {
+        let countryId = 0;
+        return {
+          id: countryId++,
+          name: country.name.common,
+          alpha2Code: country.alpha2Code.toLowerCase(),
+          alpha3Code: country.alpha3Code,
+        };
+      });
+    },
+  },
+  // mounted() {
+  //   console.log("Hola", this.countries);
+  // },
+};
 </script>
 
 <style>
-
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -80,5 +93,4 @@ code {
     transform: rotate(360deg);
   }
 }
-
 </style>
