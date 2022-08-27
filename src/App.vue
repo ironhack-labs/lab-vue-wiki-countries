@@ -96,5 +96,9 @@ code {
     transform: rotate(360deg);
   }
 }
-
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 </style>

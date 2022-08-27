@@ -1,15 +1,15 @@
 <template>
   <div class="countries-details--container">
     <img :src="`https://flagpedia.net/data/flags/icon/72x54/${countryInfo.alpha2Code.toLowerCase()}.png`" :alt="`Flag of the ${countryInfo.name}`">
-    <h1></h1>
-    <p>Capital: {{ }}</p>
-    <p>Area: {{ }}</p>
+    <h1>Esto es Country Details</h1>
+    <p>Capital: {{ countryInfo.capital }}</p>
+    <p>Area: {{ countryInfo.area}} Km2</p>
     <router-link v-for="border in countryInfo.borders" :key="border" :to="border">{{ border }}</router-link>
   </div>
 </template>
 
 <script>
-import countriesData from '/public/countries.json';
+import countriesData from '../../public/countries.json';
 
 export default {
   name: 'CountryDetails',
