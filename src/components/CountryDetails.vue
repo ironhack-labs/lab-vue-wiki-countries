@@ -10,6 +10,7 @@
 
 <script>
 import countriesData from '/public/countries.json';
+
 export default {
   name: 'CountryDetails',
   data() {
