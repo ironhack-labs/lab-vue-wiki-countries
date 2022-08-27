@@ -34,9 +34,6 @@ export default {
       });
     },
   },
-  // mounted() {
-  //   console.log("Hola", this.countries);
-  // },
 };
 </script>
 
