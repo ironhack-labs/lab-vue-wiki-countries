@@ -1,10 +1,11 @@
 <template>
   <Navbar/>
-  <Countrieslist/>
+  <Countrieslist :countries="countries"/>
   <router-view/>
 </template>
 
 <script>
+  import countriesData from '../public/countries.json';
   import Navbar from './components/Navbar.vue';
   import Countrieslist from './components/CountriesList.vue';
 
@@ -13,6 +14,11 @@
       Navbar,
       Countrieslist,
     },
+    data() {
+      return {
+        countries: countriesData,
+      }
+    }
   }
 </script>
 
