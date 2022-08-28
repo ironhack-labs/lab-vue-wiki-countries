@@ -26,4 +26,7 @@ export default {
 </script>
 
 <style>
+.list-group {
+  text-align: center;
+}
 </style>

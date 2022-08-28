@@ -1,7 +1,9 @@
 <template>
   <Navbar/>
+  <div class="pagecolumns">
   <Countrieslist :countries="countries"/>
   <router-view/>
+  </div>
 </template>
 
 <script>
@@ -35,6 +37,11 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.pagecolumns {
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 .app {
