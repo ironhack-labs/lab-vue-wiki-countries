@@ -1,29 +1,46 @@
 <template>
   <div className="app">
-    <header className="app-header">
-      <img :src="logo" className="app-logo" alt="logo" />
-      <p>
-        Edit <code>src/app.js</code> and save to reload.
-      </p>
-      <a
-        className="app-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn Vue
-      </a>
-    </header>
+    <NavBar />
+    <div class="container">
+      <div class="row">
+        <CountriesList :countries="countries"/>
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import logo from './logo.svg';
+  import countriesData from '../public/countries.json';
+  import NavBar from '../src/components/NavBar.vue';
+  import CountriesList from './components/CountriesList.vue';
+  
+
   export default {
-    data: () => ({
-      logo
-    })
-  }
+    name: 'App',
+    components: { 
+      NavBar,
+      CountriesList,
+    },
+    data() {
+      return {
+        countries: countriesData,
+      };
+    },
+    computed: {
+      getCoutriesElementsToShowList() {
+        let countryId = 0;
+        return this.countries.map(country => {
+          return {
+            id: ++countryId,
+            name: country.name.common,
+            alpha2Code: country.alpha2Code,
+            alpha3Code: country.alpha3Code,
+          }
+        });
+      },
+    }
+  };
 </script>
 
 <style>
@@ -79,5 +96,9 @@ code {
     transform: rotate(360deg);
   }
 }
-
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 </style>
