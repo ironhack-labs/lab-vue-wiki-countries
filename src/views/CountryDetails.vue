@@ -1,16 +1,39 @@
 <template>
-<h1>Esta es la vista Details</h1>
-    
+  <div class="container">
+    <h1>Esta es la vista de detalle</h1>
+    <ul>
+      <li>{{}}</li>
+      <li>{{}}</li>
+      <li>{{}}</li>
+      <li>{{}}</li>
+    </ul>
+  </div>
 </template>
 <script>
-import countriesData from '../../public/countries.json';
 export default {
-    name: 'CountryDetails',
-     data() {
+  name: "CountryDetails",
+  data() {
     return {
-      countries: countriesData,
+      countryInfo: null,
     };
-},
-};
-//seguir con created
+  },
+  created(){
+    const {countryCode} = this.$route.params;
+
+    if (countryCode) {
+        fetch(`https://ih-countries-api.herokuapp.com/countries/${country.alpha3Code}`)
+        .then ((Response)=> Response.json())
+        .then ((data)=> {
+         this.countryInfo ={
+            area:data.area,            
+            name: data.name.common,
+            alpha2Code:data.alpha2Code.toLowerCase(),
+            capital: data.capital,
+            borders: data.borders,
+          }
+      });
+    }
+  },
+}
+
 </script>
