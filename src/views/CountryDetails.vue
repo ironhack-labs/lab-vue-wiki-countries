@@ -31,16 +31,22 @@ export default {
     if (countryCode) {
       this.fetchCountry(countryCode);
     }
+    this.$watch(
+      () => this.$route.params,
+      (toParams, previousParams) => {
+        if (toParams.countryCode) {
+          this.fetchCountry(toParams.countryCode);
+        }
+      }
+    );
   },
-  methods:{
-    fetchCountry(countryCode){
-        fetch(
-        `https://ih-countries-api.herokuapp.com/countries/${countryCode}`
-      )
+  methods: {
+    fetchCountry(countryCode) {
+      fetch(`https://ih-countries-api.herokuapp.com/countries/${countryCode}`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-            this.countryInfo = {
+          console.log(data);
+          this.countryInfo = {
             area: data.area,
             name: data.name.common,
             alpha2Code: data.alpha2Code.toLowerCase(),
@@ -49,6 +55,6 @@ export default {
           };
         });
     },
-}
+  },
 };
 </script>
