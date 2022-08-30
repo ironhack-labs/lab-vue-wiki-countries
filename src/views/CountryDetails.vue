@@ -1,12 +1,20 @@
 <template>
-  <div class="container">
-    <h1>Esta es la vista de detalle</h1>
-    <ul>
-      <li>{{}}</li>
-      <li>{{}}</li>
-      <li>{{}}</li>
-      <li>{{}}</li>
-    </ul>
+  <div class="container" v-if="countryInfo !== null">
+    <h1>{{ countryInfo.name }}</h1>
+    <div>
+      <img
+        :src="`https://flagpedia.net/data/flags/icon/72x54/${countryInfo.alpha2Code}.png`"
+        alt=""
+      />
+      <p>{{ countryInfo.capital[0] }}</p>
+      <router-link
+        v-for="border in countryInfo.borders"
+        :key="border"
+        :to="border"
+      >
+        {{ border }}
+      </router-link>
+    </div>
   </div>
 </template>
 <script>
@@ -17,23 +25,30 @@ export default {
       countryInfo: null,
     };
   },
-  created(){
-    const {countryCode} = this.$route.params;
+  created() {
+    const { countryCode } = this.$route.params;
 
     if (countryCode) {
-        fetch(`https://ih-countries-api.herokuapp.com/countries/${country.alpha3Code}`)
-        .then ((Response)=> Response.json())
-        .then ((data)=> {
-         this.countryInfo ={
-            area:data.area,            
-            name: data.name.common,
-            alpha2Code:data.alpha2Code.toLowerCase(),
-            capital: data.capital,
-            borders: data.borders,
-          }
-      });
+      this.fetchCountry(countryCode);
     }
   },
+  methods:{
+    fetchCountry(countryCode){
+        fetch(
+        `https://ih-countries-api.herokuapp.com/countries/${countryCode}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            this.countryInfo = {
+            area: data.area,
+            name: data.name.common,
+            alpha2Code: data.alpha2Code.toLowerCase(),
+            capital: data.capital,
+            borders: data.borders,
+          };
+        });
+    },
 }
-
+};
 </script>
