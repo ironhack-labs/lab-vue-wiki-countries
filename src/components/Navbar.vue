@@ -1,5 +1,5 @@
 <template>
-  <div>LAB - WikiCountries</div>
+  <div class="navbar">LAB - WikiCountries</div>
 </template>
 
 <script>
@@ -10,8 +10,11 @@ export default {
 
 <style>
 
-div {
-    color: black;
+.navbar {
+    width: 100%;
+    background-color: blue;
+    color: white;
+    position: sticky ;
 }
 
 </style>
