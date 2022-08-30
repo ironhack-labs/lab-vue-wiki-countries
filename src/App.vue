@@ -1,8 +1,10 @@
 <template>
   <div class="app">
     <NavBar></NavBar>
-    <CountriesList :countries="getCountry"></CountriesList>
-    <router-view />
+    <div class="mainbody">
+      <CountriesList :countries="getCountry"></CountriesList>
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -29,7 +31,7 @@ export default {
         return {
           id: countryId++,
           name: country.name.common,
-          alpha2Code: country.alpha2Code.toLowerCase(),
+          alpha2Code: country.alpha2Code,
           alpha3Code: country.alpha3Code,
         };
       });
@@ -39,4 +41,9 @@ export default {
 </script>
 
 <style>
+.mainbody{
+  display: flex;
+  justify-content: space-between;
+  
+}
 </style>

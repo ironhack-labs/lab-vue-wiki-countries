@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: '/:countryCode',
-    name: '/CountryDetails',
+    name: 'CountryDetails',
     component: CountryDetails,
   },
 ];
