@@ -5,13 +5,18 @@
               
             </div> -->
           <!-- </div>   -->
-    <div>
+    <div class="container">
+      <div class="row">
        <CountriesList
-
        ></CountriesList> 
-       <router-view></router-view>
+       <router-view/>
+      </div>
     </div>      
 </template>
+
+
+
+  
 
 <script setup>
 
