@@ -1,5 +1,5 @@
 <template>
-  <h1>¡HOLA!</h1>
+  <h1>Select the first country</h1>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <!--<p class="hola">user is {{ countryCode }}</p> -->
-  <div class="hola">
+  <div class="country-container">
     <img
       :src="`https://flagpedia.net/data/flags/icon/72x54/${countryInfo.alpha2Code.toLowerCase()}.png`"
       :alt="`Flag of the ${countryInfo.name}`"
@@ -35,6 +35,7 @@ export default {
   },
   created() {
     const { countryCode } = this.$route.params;
+    /*
     if (countryCode) {
       fetch("../public/countries.json")
         .then((response) => response.json())
@@ -74,13 +75,50 @@ export default {
         }
       }
     );
+    */
+   if (countryCode) {
+      fetch("https://ih-countries-api.herokuapp.com/countries")
+        .then((response) => response.json())
+        .then((data) => {
+          let desiredCountry = data.filter(
+            (country) => country.alpha3Code.toLowerCase() === countryCode
+          )[0];
+          this.countryInfo = {
+            area: desiredCountry.area,
+            alpha2Code: desiredCountry.alpha2Code,
+            name: desiredCountry.name.common,
+            capital: desiredCountry.capital[0],
+            borders: desiredCountry.borders,
+          };
+        });
+    }
+    this.$watch(
+      () => this.$route.params,
+      (toParams) => {
+        if (toParams.countryCode) {
+          fetch("https://ih-countries-api.herokuapp.com/countries")
+            .then((response) => response.json())
+            .then((data) => {
+              let desiredCountry = data.filter(
+                (country) =>
+                  country.alpha3Code.toLowerCase() === toParams.countryCode
+              )[0];
+              this.countryInfo = {
+                area: desiredCountry.area,
+                alpha2Code: desiredCountry.alpha2Code,
+                name: desiredCountry.name.common,
+                capital: desiredCountry.capital[0],
+                borders: desiredCountry.borders,
+              };
+            });
+        }
+      }
+    );
+   
   },
 };
 </script>
 
 <style>
-.hola {
-  border: solid;
-  font-size: 60px;
-}
+
 </style>
