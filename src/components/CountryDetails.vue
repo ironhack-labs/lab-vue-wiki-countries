@@ -1,6 +1,5 @@
 <template>
-
-	<div v-if="selectedCountry !== null">
+	<div v-if="selectedCountry">
 		<img :src="`https://flagpedia.net/data/flags/icon/72x54/${selectedCountry.alpha2Code.toLowerCase()}.png`"
 			alt="country flag" style="width: 70px" />
 		<h1>{{  selectedCountry.name  }}</h1>
@@ -39,19 +38,21 @@ import { mapActions, mapState } from 'pinia';
 import MyStore from '../store/MyStore';
 export default {
 	methods: {
-		...mapActions(MyStore, ['selectCountry'])
+		...mapActions(MyStore, ['selectCountry']),
+		...mapActions(MyStore, ['fetchSelectedCountry']),
 	},
 	watch: {
 		$route(value, oldValue) {
 			this.selectCountry(value.params.alpha3Code)
+			this.fetchSelectedCountry()
 		}
 	},
 	created() {
-		console.log(this.$route.params.alpha3Code);
 		this.selectCountry(this.$route.params.alpha3Code)
+		this.fetchSelectedCountry()
 	},
 	computed: {
-		...mapState(MyStore, ['selectedCountry']),
+		...mapState(MyStore, ['selectedCountry'])
 	},
 }
 </script>
