@@ -1,83 +1,70 @@
 <template>
-  <div className="app">
-    <header className="app-header">
-      <img :src="logo" className="app-logo" alt="logo" />
-      <p>
-        Edit <code>src/app.js</code> and save to reload.
-      </p>
-      <a
-        className="app-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn Vue
-      </a>
-    </header>
+  <div class="app">
+    <NavBar class="navbar"></NavBar>
+    <div class="mainbody">
+      <CountriesList
+        class="countries-list"
+        :countries="getCountry"
+      ></CountriesList>
+      <router-view class="country-detail" />
+    </div>
   </div>
 </template>
 
 <script>
-  import logo from './logo.svg';
-  export default {
-    data: () => ({
-      logo
-    })
-  }
+import NavBar from "./components/NavBar.vue";
+import CountriesList from "./components/CountriesList.vue";
+import CountriesData from "../public/countries.json";
+
+export default {
+  name: "App",
+  components: {
+    NavBar: NavBar,
+    CountriesList: CountriesList,
+  },
+  data() {
+    return {
+      countries: CountriesData,
+    };
+  },
+  computed: {
+    getCountry() {
+      return this.countries.map((country) => {
+        let countryId = 0;
+        return {
+          id: countryId++,
+          name: country.name.common,
+          alpha2Code: country.alpha2Code,
+          alpha3Code: country.alpha3Code,
+        };
+      });
+    },
+  },
+};
 </script>
 
 <style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.navbar{
+  height: 100px;
+  background-color: rgb(13, 226, 138);
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-.app {
-  text-align: center;
-}
-
-.app-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .app-logo {
-    animation: app-logo-spin infinite 20s linear;
-  }
-}
-
-.app-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.mainbody {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
-
-.app-link {
-  color: #61dafb;
+.country-detail {
+  margin: 70px;
+  text-align: center;
+  font-size: 30px;
+  height: 1000px;
+  width: 80vw;
 }
-
-@keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.countries-list {
+  text-align: center;
+  width: 20vw;
+  height: 62vw;
+  overflow-y: scroll;
+  border: solid rgb(13, 226, 138);
 }
 
 </style>
