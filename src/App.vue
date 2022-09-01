@@ -2,7 +2,7 @@
   <Navbar></Navbar>
   <div class="container">
     <CountriesList :countries="getCountry" ></CountriesList>
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 <script>
@@ -60,6 +60,10 @@ code {
   height: 40vmin;
   pointer-events: none;
 }
+.container{
+  display: flex;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .app-logo {
